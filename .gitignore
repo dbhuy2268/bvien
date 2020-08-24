@@ -1,6 +1,5 @@
 # Visual Studio cache directory
 .vs/
-bin/
 *.suo
 *.tmp
 *.pdb
