@@ -55,3 +55,32 @@ C:\Users\huy\Desktop\QLBENHVIEN-ORCL\obj\Debug\QLBENHVIEN-ORCL.csproj.CopyComple
 C:\Users\huy\Desktop\QLBENHVIEN-ORCL\obj\Debug\QLBENHVIEN-ORCL.exe
 C:\Users\huy\Desktop\QLBENHVIEN-ORCL\obj\Debug\QLBENHVIEN-ORCL.pdb
 C:\Users\huy\Desktop\QLBENHVIEN-ORCL\obj\Debug\QLBENHVIEN-ORCL.csprojAssemblyReference.cache
+\\vmware-host\Shared Folders\Downloads\bvien\QLBENHVIEN-ORCL\bin\Debug\Oracle.DataAccess.dll
+\\vmware-host\Shared Folders\Downloads\bvien\QLBENHVIEN-ORCL\bin\Debug\oci.dll
+\\vmware-host\Shared Folders\Downloads\bvien\QLBENHVIEN-ORCL\bin\Debug\oramts.dll
+\\vmware-host\Shared Folders\Downloads\bvien\QLBENHVIEN-ORCL\bin\Debug\oramts12.dll
+\\vmware-host\Shared Folders\Downloads\bvien\QLBENHVIEN-ORCL\bin\Debug\oramtsus.dll
+\\vmware-host\Shared Folders\Downloads\bvien\QLBENHVIEN-ORCL\bin\Debug\orannzsbb12.dll
+\\vmware-host\Shared Folders\Downloads\bvien\QLBENHVIEN-ORCL\bin\Debug\oraocci12.dll
+\\vmware-host\Shared Folders\Downloads\bvien\QLBENHVIEN-ORCL\bin\Debug\oraocci12d.dll
+\\vmware-host\Shared Folders\Downloads\bvien\QLBENHVIEN-ORCL\bin\Debug\oraociei12.dll
+\\vmware-host\Shared Folders\Downloads\bvien\QLBENHVIEN-ORCL\bin\Debug\oraons.dll
+\\vmware-host\Shared Folders\Downloads\bvien\QLBENHVIEN-ORCL\bin\Debug\OraOps12.dll
+\\vmware-host\Shared Folders\Downloads\bvien\QLBENHVIEN-ORCL\bin\Debug\QLBENHVIEN-ORCL.exe.config
+\\vmware-host\Shared Folders\Downloads\bvien\QLBENHVIEN-ORCL\bin\Debug\QLBENHVIEN-ORCL.exe
+\\vmware-host\Shared Folders\Downloads\bvien\QLBENHVIEN-ORCL\bin\Debug\QLBENHVIEN-ORCL.pdb
+\\vmware-host\Shared Folders\Downloads\bvien\QLBENHVIEN-ORCL\obj\Debug\QLBENHVIEN-ORCL.csprojAssemblyReference.cache
+\\vmware-host\Shared Folders\Downloads\bvien\QLBENHVIEN-ORCL\obj\Debug\QLBENHVIEN_ORCL.create.resources
+\\vmware-host\Shared Folders\Downloads\bvien\QLBENHVIEN-ORCL\obj\Debug\QLBENHVIEN_ORCL.Form1.resources
+\\vmware-host\Shared Folders\Downloads\bvien\QLBENHVIEN-ORCL\obj\Debug\QLBENHVIEN_ORCL.Grant_Option.resources
+\\vmware-host\Shared Folders\Downloads\bvien\QLBENHVIEN-ORCL\obj\Debug\QLBENHVIEN_ORCL.Grant_privs.resources
+\\vmware-host\Shared Folders\Downloads\bvien\QLBENHVIEN-ORCL\obj\Debug\QLBENHVIEN_ORCL.grant_revoke_objectPriv.resources
+\\vmware-host\Shared Folders\Downloads\bvien\QLBENHVIEN-ORCL\obj\Debug\QLBENHVIEN_ORCL.Login.resources
+\\vmware-host\Shared Folders\Downloads\bvien\QLBENHVIEN-ORCL\obj\Debug\QLBENHVIEN_ORCL.OBJECT_PRIV.resources
+\\vmware-host\Shared Folders\Downloads\bvien\QLBENHVIEN-ORCL\obj\Debug\QLBENHVIEN_ORCL.privs.resources
+\\vmware-host\Shared Folders\Downloads\bvien\QLBENHVIEN-ORCL\obj\Debug\QLBENHVIEN_ORCL.Properties.Resources.resources
+\\vmware-host\Shared Folders\Downloads\bvien\QLBENHVIEN-ORCL\obj\Debug\QLBENHVIEN-ORCL.csproj.GenerateResource.cache
+\\vmware-host\Shared Folders\Downloads\bvien\QLBENHVIEN-ORCL\obj\Debug\QLBENHVIEN-ORCL.csproj.CoreCompileInputs.cache
+\\vmware-host\Shared Folders\Downloads\bvien\QLBENHVIEN-ORCL\obj\Debug\QLBENHVIEN-ORCL.csproj.CopyComplete
+\\vmware-host\Shared Folders\Downloads\bvien\QLBENHVIEN-ORCL\obj\Debug\QLBENHVIEN-ORCL.exe
+\\vmware-host\Shared Folders\Downloads\bvien\QLBENHVIEN-ORCL\obj\Debug\QLBENHVIEN-ORCL.pdb
