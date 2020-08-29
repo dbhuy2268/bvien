@@ -3,7 +3,7 @@
 /* Created on:     8/24/2020 2:02:30 PM                         */
 /*==============================================================*/
 -- USER + DB DANH CHO PHAN HE 1
-CONN / AS SYSDBA;
+CONN SYS/1231 AS SYSDBA;
 
 BEGIN
     EXECUTE IMMEDIATE 'DROP USER DBA_BV01 CASCADE';
@@ -601,19 +601,19 @@ GRANT INSERT, DELETE, UPDATE ON NHANVIEN TO QUAN_LY_TAI_NGUYEN;
 GRANT INSERT, DELETE, UPDATE ON LICHTRUC TO QUAN_LY_TAI_NGUYEN;
 GRANT INSERT, DELETE, UPDATE ON CUOCHOP TO QUAN_LY_TAI_NGUYEN;
 
-GRANT SELECT ON DBA_BV01.BENHNHAN to QUAN_LY_TAI_NGUYEN;
-GRANT SELECT ON DBA_BV01.CHAMCONG to QUAN_LY_TAI_NGUYEN;
-GRANT SELECT ON DBA_BV01.CHITIETDICHVUHD to QUAN_LY_TAI_NGUYEN;
-GRANT SELECT ON DBA_BV01.CHITIETTHUOCHD to QUAN_LY_TAI_NGUYEN;
-GRANT SELECT ON DBA_BV01.DICHVU to QUAN_LY_TAI_NGUYEN;
-GRANT SELECT ON DBA_BV01.LUONG to QUAN_LY_TAI_NGUYEN;
-GRANT SELECT ON DBA_BV01.LICHTRUC to QUAN_LY_TAI_NGUYEN;
-GRANT SELECT ON DBA_BV01.NHANVIEN to QUAN_LY_TAI_NGUYEN;
-GRANT SELECT ON DBA_BV01.PHONG to QUAN_LY_TAI_NGUYEN;
-GRANT SELECT ON DBA_BV01.PHONGBAN to QUAN_LY_TAI_NGUYEN;
-GRANT SELECT ON DBA_BV01.THONGTINKHAMBENH to QUAN_LY_TAI_NGUYEN;
-GRANT SELECT ON DBA_BV01.THUOC to QUAN_LY_TAI_NGUYEN;
-GRANT SELECT ON DBA_BV01.CUOCHOP to QUAN_LY_TAI_NGUYEN;
+GRANT SELECT ON DBA_BV01.BENHNHAN TO QUAN_LY_TAI_NGUYEN;
+GRANT SELECT ON DBA_BV01.CHAMCONG TO QUAN_LY_TAI_NGUYEN;
+GRANT SELECT ON DBA_BV01.CHITIETDICHVUHD TO QUAN_LY_TAI_NGUYEN;
+GRANT SELECT ON DBA_BV01.CHITIETTHUOCHD TO QUAN_LY_TAI_NGUYEN;
+GRANT SELECT ON DBA_BV01.DICHVU TO QUAN_LY_TAI_NGUYEN;
+GRANT SELECT ON DBA_BV01.LUONG TO QUAN_LY_TAI_NGUYEN;
+GRANT SELECT ON DBA_BV01.LICHTRUC TO QUAN_LY_TAI_NGUYEN;
+GRANT SELECT ON DBA_BV01.NHANVIEN TO QUAN_LY_TAI_NGUYEN;
+GRANT SELECT ON DBA_BV01.PHONG TO QUAN_LY_TAI_NGUYEN;
+GRANT SELECT ON DBA_BV01.PHONGBAN TO QUAN_LY_TAI_NGUYEN;
+GRANT SELECT ON DBA_BV01.THONGTINKHAMBENH TO QUAN_LY_TAI_NGUYEN;
+GRANT SELECT ON DBA_BV01.THUOC TO QUAN_LY_TAI_NGUYEN;
+GRANT SELECT ON DBA_BV01.CUOCHOP TO QUAN_LY_TAI_NGUYEN;
 /
 
 CREATE ROLE QUAN_LY_TAI_VU;
@@ -627,19 +627,19 @@ FROM     DBA_TABLES WHERE OWNER = 'DBA_BV01';
 /
 
 CREATE ROLE QUAN_LY_CHUYEN_MON;
-GRANT SELECT ON DBA_BV01.BENHNHAN to QUAN_LY_CHUYEN_MON;
-GRANT SELECT ON DBA_BV01.CHAMCONG to QUAN_LY_CHUYEN_MON;
-GRANT SELECT ON DBA_BV01.CHITIETDICHVUHD to QUAN_LY_CHUYEN_MON;
-GRANT SELECT ON DBA_BV01.CHITIETTHUOCHD to QUAN_LY_CHUYEN_MON;
-GRANT SELECT ON DBA_BV01.DICHVU to QUAN_LY_CHUYEN_MON;
-GRANT SELECT ON DBA_BV01.LUONG to QUAN_LY_CHUYEN_MON;
-GRANT SELECT ON DBA_BV01.LICHTRUC to QUAN_LY_CHUYEN_MON;
-GRANT SELECT ON DBA_BV01.NHANVIEN to QUAN_LY_CHUYEN_MON;
-GRANT SELECT ON DBA_BV01.PHONG to QUAN_LY_CHUYEN_MON;
-GRANT SELECT ON DBA_BV01.PHONGBAN to QUAN_LY_CHUYEN_MON;
-GRANT SELECT ON DBA_BV01.THONGTINKHAMBENH to QUAN_LY_CHUYEN_MON;
-GRANT SELECT ON DBA_BV01.THUOC to QUAN_LY_CHUYEN_MON;
-GRANT SELECT ON DBA_BV01.CUOCHOP to QUAN_LY_CHUYEN_MON;
+GRANT SELECT ON DBA_BV01.BENHNHAN TO QUAN_LY_CHUYEN_MON;
+GRANT SELECT ON DBA_BV01.CHAMCONG TO QUAN_LY_CHUYEN_MON;
+GRANT SELECT ON DBA_BV01.CHITIETDICHVUHD TO QUAN_LY_CHUYEN_MON;
+GRANT SELECT ON DBA_BV01.CHITIETTHUOCHD TO QUAN_LY_CHUYEN_MON;
+GRANT SELECT ON DBA_BV01.DICHVU TO QUAN_LY_CHUYEN_MON;
+GRANT SELECT ON DBA_BV01.LUONG TO QUAN_LY_CHUYEN_MON;
+GRANT SELECT ON DBA_BV01.LICHTRUC TO QUAN_LY_CHUYEN_MON;
+GRANT SELECT ON DBA_BV01.NHANVIEN TO QUAN_LY_CHUYEN_MON;
+GRANT SELECT ON DBA_BV01.PHONG TO QUAN_LY_CHUYEN_MON;
+GRANT SELECT ON DBA_BV01.PHONGBAN TO QUAN_LY_CHUYEN_MON;
+GRANT SELECT ON DBA_BV01.THONGTINKHAMBENH TO QUAN_LY_CHUYEN_MON;
+GRANT SELECT ON DBA_BV01.THUOC TO QUAN_LY_CHUYEN_MON;
+GRANT SELECT ON DBA_BV01.CUOCHOP TO QUAN_LY_CHUYEN_MON;
 
 /
 
@@ -799,12 +799,13 @@ CONN LBACSYS/1231;
 
 
 BEGIN
-    EXECUTE SA_SYSDBA.DROP_POLICY(policy_name => 'ACCESS_HOP', DROP_COLUMN => TRUE);
+    SA_SYSDBA.DROP_POLICY(POLICY_NAME => 'ACCESS_HOP', DROP_COLUMN => TRUE);
+
 	EXCEPTION WHEN OTHERS THEN NULL; 
 END;
 /
 
-EXECUTE SA_SYSDBA.CREATE_POLICY(policy_name => 'ACCESS_HOP', column_name => 'OLS_HOP_COLUMN');
+EXECUTE SA_SYSDBA.CREATE_POLICY(POLICY_NAME => 'ACCESS_HOP', COLUMN_NAME => 'OLS_HOP_COLUMN');
 
 -- QUYEN QUAN TRI OLS POLICY
 GRANT ACCESS_HOP_DBA TO DBA_BV01;
@@ -823,18 +824,18 @@ GRANT EXECUTE ON SA_USER_ADMIN TO DBA_BV01;
 
 -- DROP LEVEL
 BEGIN
-    sa_components.DROP_LEVEL(
-        policy_name   => 'ACCESS_HOP',
-        short_name     => 'QL');
+    SA_COMPONENTS.DROP_LEVEL(
+        POLICY_NAME   => 'ACCESS_HOP',
+        SHORT_NAME     => 'QL');
 
 	EXCEPTION WHEN OTHERS THEN NULL; 
 END;
 /
 
 BEGIN
-    sa_components.DROP_LEVEL(
-        policy_name   => 'ACCESS_HOP',
-        short_name     => 'NV');
+    SA_COMPONENTS.DROP_LEVEL(
+        POLICY_NAME   => 'ACCESS_HOP',
+        SHORT_NAME     => 'NV');
 
     EXCEPTION WHEN OTHERS THEN NULL; 
 END;
@@ -842,83 +843,499 @@ END;
 
 -- CREATE LEVEL
 BEGIN
-    sa_components.create_level(
-        policy_name   => 'ACCESS_HOP',
-        long_name      => 'QUANLY',
-        short_name     => 'QL',
-        level_num      => 9000);
+    SA_COMPONENTS.CREATE_LEVEL(
+        POLICY_NAME   => 'ACCESS_HOP',
+        LONG_NAME      => 'QUANLY',
+        SHORT_NAME     => 'QL',
+        LEVEL_NUM      => 9000);
 END;
 /
 
 BEGIN
-    sa_components.create_level(
-        policy_name   => 'ACCESS_HOP',
-        long_name      => 'NHANVIEN',
-        short_name     => 'NV',
-        level_num      => 2000);
+    SA_COMPONENTS.CREATE_LEVEL(
+        POLICY_NAME   => 'ACCESS_HOP',
+        LONG_NAME      => 'NHANVIEN',
+        SHORT_NAME     => 'NV',
+        LEVEL_NUM      => 2000);
 END;
 /
 
 -- DROP COMPARTMENT
 
 BEGIN
-    EXECUTE SA_SYSDBA.DROP_POLICY(policy_name => 'ACCESS_HOP', DROP_COLUMN => TRUE);
-	EXCEPTION WHEN OTHERS THEN NULL; 
+    SA_COMPONENTS.DROP_COMPARTMENT(
+        POLICY_NAME   => 'ACCESS_HOP',
+        SHORT_NAME     => 'HQL');
+
+    EXCEPTION WHEN OTHERS THEN NULL; 
+END;
+/
+
+BEGIN
+    SA_COMPONENTS.DROP_COMPARTMENT(
+        POLICY_NAME   => 'ACCESS_HOP',
+        SHORT_NAME     => 'HBS');
+
+    EXCEPTION WHEN OTHERS THEN NULL; 
+END;
+/
+
+BEGIN
+    SA_COMPONENTS.DROP_COMPARTMENT(
+        POLICY_NAME   => 'ACCESS_HOP',
+        SHORT_NAME     => 'HTV');
+
+    EXCEPTION WHEN OTHERS THEN NULL; 
+END;
+/
+
+BEGIN
+    SA_COMPONENTS.DROP_COMPARTMENT(
+        POLICY_NAME   => 'ACCESS_HOP',
+        SHORT_NAME     => 'HKT');
+
+    EXCEPTION WHEN OTHERS THEN NULL; 
+END;
+/
+
+BEGIN
+    SA_COMPONENTS.DROP_COMPARTMENT(
+        POLICY_NAME   => 'ACCESS_HOP',
+        SHORT_NAME     => 'HTT');
+
+    EXCEPTION WHEN OTHERS THEN NULL; 
+END;
+/
+
+BEGIN
+    SA_COMPONENTS.DROP_COMPARTMENT(
+        POLICY_NAME   => 'ACCESS_HOP',
+        SHORT_NAME     => 'HBT');
+
+    EXCEPTION WHEN OTHERS THEN NULL; 
 END;
 /
 
 -- CREATE COMPARTMENT
 
 BEGIN
-    sa_components.create_compartment(
-    	policy_name   => 'ACCESS_HOP',
-		long_name      => 'HOP_QUANLY',
-		short_name     => 'HQL',
-		comp_num       => 1000);
+    SA_COMPONENTS.CREATE_COMPARTMENT(
+    	POLICY_NAME   => 'ACCESS_HOP',
+		LONG_NAME      => 'HOP_QUANLY',
+		SHORT_NAME     => 'HQL',
+		COMP_NUM       => 1000);
 END;
 /
 
 BEGIN
-    sa_components.create_compartment(
-    	policy_name   => 'ACCESS_HOP',
-		long_name      => 'HOP_BACSI',
-		short_name     => 'HBS',
-		comp_num       => 2000);
+    SA_COMPONENTS.CREATE_COMPARTMENT(
+    	POLICY_NAME   => 'ACCESS_HOP',
+		LONG_NAME      => 'HOP_BACSI',
+		SHORT_NAME     => 'HBS',
+		COMP_NUM       => 2000);
 END;
 /
 
 BEGIN
-    sa_components.create_compartment(
-    	policy_name   => 'ACCESS_HOP',
-		long_name      => 'HOP_TAIVU',
-		short_name     => 'HTV',
-		comp_num       => 3000);
+    SA_COMPONENTS.CREATE_COMPARTMENT(
+    	POLICY_NAME   => 'ACCESS_HOP',
+		LONG_NAME      => 'HOP_TAIVU',
+		SHORT_NAME     => 'HTV',
+		COMP_NUM       => 3000);
 END;
 /
 
 BEGIN
-    sa_components.create_compartment(
-    	policy_name   => 'ACCESS_HOP',
-		long_name      => 'HOP_KETOAN',
-		short_name     => 'HKT',
-		comp_num       => 4000);
+    SA_COMPONENTS.CREATE_COMPARTMENT(
+    	POLICY_NAME   => 'ACCESS_HOP',
+		LONG_NAME      => 'HOP_KETOAN',
+		SHORT_NAME     => 'HKT',
+		COMP_NUM       => 4000);
 END;
 /
 
 BEGIN
-    sa_components.create_compartment(
-    	policy_name   => 'ACCESS_HOP',
-		long_name      => 'HOP_BANTHUOC',
-		short_name     => 'HBT',
-		comp_num       => 5000);
+    SA_COMPONENTS.CREATE_COMPARTMENT(
+    	POLICY_NAME   => 'ACCESS_HOP',
+		LONG_NAME      => 'HOP_BANTHUOC',
+		SHORT_NAME     => 'HBT',
+		COMP_NUM       => 5000);
 END;
 /
 
 BEGIN
-    sa_components.create_compartment(
-    	policy_name   => 'ACCESS_HOP',
-		long_name      => 'HOP_TIEPTAN',
-		short_name     => 'HTT',
-		comp_num       => 6000);
+    SA_COMPONENTS.CREATE_COMPARTMENT(
+    	POLICY_NAME   => 'ACCESS_HOP',
+		LONG_NAME      => 'HOP_TIEPTAN',
+		SHORT_NAME     => 'HTT',
+		COMP_NUM       => 6000);
+END;
+/
+
+-- DROP GROUP
+
+BEGIN
+    SA_COMPONENTS.DROP_GROUP(
+        POLICY_NAME   => 'ACCESS_HOP',
+        SHORT_NAME     => 'SG');
+
+    EXCEPTION WHEN OTHERS THEN NULL; 
+END;
+/
+
+BEGIN
+    SA_COMPONENTS.DROP_GROUP(
+        POLICY_NAME   => 'ACCESS_HOP',
+        SHORT_NAME     => 'HN');
+
+    EXCEPTION WHEN OTHERS THEN NULL; 
+END;
+/
+
+-- CREATE GROUP
+
+BEGIN  
+	SA_COMPONENTS.CREATE_GROUP(
+		POLICY_NAME   => 'ACCESS_HOP',
+		LONG_NAME      => 'SAI_GON',
+		SHORT_NAME     => 'SG',
+		GROUP_NUM      => 51,
+		PARENT_NAME    => NULL);
+END;
+/
+
+BEGIN  
+	SA_COMPONENTS.CREATE_GROUP(
+		POLICY_NAME   => 'ACCESS_HOP',
+		LONG_NAME      => 'HA_NOI',
+		SHORT_NAME     => 'HN',
+		GROUP_NUM      => 29,
+		PARENT_NAME    => NULL);
+END;
+/
+
+-- DROP LABEL
+
+BEGIN		
+	SA_LABEL_ADMIN.DROP_LABEL(
+		POLICY_NAME   => 'ACCESS_HOP',
+		LABEL_TAG      => 10000);
+
+	EXCEPTION WHEN OTHERS THEN NULL; 
+END;
+/
+
+BEGIN		
+	SA_LABEL_ADMIN.DROP_LABEL(
+		POLICY_NAME   => 'ACCESS_HOP',
+		LABEL_TAG      => 40000);
+
+	EXCEPTION WHEN OTHERS THEN NULL; 
+END;
+/
+
+BEGIN		
+	SA_LABEL_ADMIN.DROP_LABEL(
+		POLICY_NAME   => 'ACCESS_HOP',
+		LABEL_TAG      => 10051);
+
+	EXCEPTION WHEN OTHERS THEN NULL;
+END;
+/
+
+BEGIN		
+	SA_LABEL_ADMIN.DROP_LABEL(
+		POLICY_NAME   => 'ACCESS_HOP',
+		LABEL_TAG      => 10029);
+
+	EXCEPTION WHEN OTHERS THEN NULL;
+END;
+/
+
+BEGIN		
+	SA_LABEL_ADMIN.DROP_LABEL(
+		POLICY_NAME   => 'ACCESS_HOP',
+		LABEL_TAG      => 40051);
+
+	EXCEPTION WHEN OTHERS THEN NULL;
+END;
+/
+
+BEGIN		
+	SA_LABEL_ADMIN.DROP_LABEL(
+		POLICY_NAME   => 'ACCESS_HOP',
+		LABEL_TAG      => 40029);
+
+	EXCEPTION WHEN OTHERS THEN NULL;
+END;
+/
+
+-- CREATE LABEL
+
+BEGIN		
+	SA_LABEL_ADMIN.CREATE_LABEL(
+		POLICY_NAME   => 'ACCESS_HOP',
+		LABEL_TAG      => 10000,
+		LABEL_VALUE    => 'NV');
+END;
+/
+
+BEGIN		
+	SA_LABEL_ADMIN.CREATE_LABEL(
+		POLICY_NAME   => 'ACCESS_HOP',
+		LABEL_TAG      => 40000,
+		LABEL_VALUE    => 'QL');
+END;
+/
+
+BEGIN		
+	SA_LABEL_ADMIN.CREATE_LABEL(
+		POLICY_NAME   => 'ACCESS_HOP',
+		LABEL_TAG      => 10051,
+		LABEL_VALUE    => 'NV::SG');
+END;
+/
+
+BEGIN		
+	SA_LABEL_ADMIN.CREATE_LABEL(
+		POLICY_NAME   => 'ACCESS_HOP',
+		LABEL_TAG      => 10029,
+		LABEL_VALUE    => 'NV::HN');
+END;
+/
+
+BEGIN		
+	SA_LABEL_ADMIN.CREATE_LABEL(
+		POLICY_NAME   => 'ACCESS_HOP',
+		LABEL_TAG      => 40051,
+		LABEL_VALUE    => 'QL::SG');
+END;
+/
+
+BEGIN		
+	SA_LABEL_ADMIN.CREATE_LABEL(
+		POLICY_NAME   => 'ACCESS_HOP',
+		LABEL_TAG      => 40029,
+		LABEL_VALUE    => 'QL::HN');
+END;
+/
+
+-- LEVEL CUA ROLE
+
+BEGIN
+	sa_user_admin.set_levels(
+		policy_name => 'ACCESS_HOP',
+		user_name    => 'QUAN_LY_TAI_NGUYEN',
+		max_level    => 'QL',
+		min_level    => 'NV',
+		def_level    => 'QL',
+		row_level    => 'QL');
+END;
+/
+
+BEGIN
+	sa_user_admin.set_levels(
+		policy_name => 'ACCESS_HOP',
+		user_name    => 'QUAN_LY_CHUYEN_MON',
+		max_level    => 'QL',
+		min_level    => 'NV',
+		def_level    => 'QL',
+		row_level    => 'QL');
+END;
+/
+
+BEGIN
+	sa_user_admin.set_levels(
+		policy_name => 'ACCESS_HOP',
+		user_name    => 'QUAN_LY_TAI_VU',
+		max_level    => 'QL',
+		min_level    => 'NV',
+		def_level    => 'QL',
+		row_level    => 'QL');
+END;
+/
+
+BEGIN
+	sa_user_admin.set_levels(
+		policy_name => 'ACCESS_HOP',
+		user_name    => 'BAC_SI',
+		max_level    => 'NV',
+		min_level    => 'NV',
+		def_level    => 'NV',
+		row_level    => 'NV');
+END;
+/
+
+BEGIN
+	sa_user_admin.set_levels(
+		policy_name => 'ACCESS_HOP',
+		user_name    => 'TAI_VU',
+		max_level    => 'NV',
+		min_level    => 'NV',
+		def_level    => 'NV',
+		row_level    => 'NV');
+END;
+/
+
+BEGIN
+	sa_user_admin.set_levels(
+		policy_name => 'ACCESS_HOP',
+		user_name    => 'TIEP_TAN',
+		max_level    => 'NV',
+		min_level    => 'NV',
+		def_level    => 'NV',
+		row_level    => 'NV');
+END;
+/
+
+BEGIN
+	sa_user_admin.set_levels(
+		policy_name => 'ACCESS_HOP',
+		user_name    => 'BAN_THUOC',
+		max_level    => 'NV',
+		min_level    => 'NV',
+		def_level    => 'NV',
+		row_level    => 'NV');
+END;
+/
+
+BEGIN
+	sa_user_admin.set_levels(
+		policy_name => 'ACCESS_HOP',
+		user_name    => 'KE_TOAN',
+		max_level    => 'NV',
+		min_level    => 'NV',
+		def_level    => 'NV',
+		row_level    => 'NV');
+END;
+/
+
+-- COMPARTMENT CUA ROLE
+
+BEGIN
+	sa_user_admin.set_compartments(
+		policy_name => 'ACCESS_HOP',
+		user_name    => 'QUAN_LY_TAI_NGUYEN',
+		read_comps   => 'HQL, HBS, HTT, HTV, HBT, HKT',
+		write_comps  => 'HQL, HBS, HTT, HTV, HBT, HKT',
+		def_comps    => 'HQL',
+		row_comps    => 'HQL');
+END;
+/
+
+BEGIN
+	sa_user_admin.set_compartments(
+		policy_name => 'ACCESS_HOP',
+		user_name    => 'QUAN_LY_CHUYEN_MON',
+		read_comps   => 'HQL, HBS, HTT, HTV, HBT, HKT',
+		write_comps  => 'HQL, HBS, HTT, HTV, HBT, HKT',
+		def_comps    => 'HQL',
+		row_comps    => 'HQL');
+END;
+/
+
+BEGIN
+	sa_user_admin.set_compartments(
+		policy_name => 'ACCESS_HOP',
+		user_name    => 'QUAN_LY_TAI_VU',
+		read_comps   => 'HQL, HBS, HTT, HTV, HBT, HKT',
+		write_comps  => 'HQL, HBS, HTT, HTV, HBT, HKT',
+		def_comps    => 'HQL',
+		row_comps    => 'HQL');
+END;
+/
+
+BEGIN
+	sa_user_admin.set_compartments(
+		policy_name => 'ACCESS_HOP',
+		user_name    => 'BAC_SI',
+		read_comps   => 'HBS',
+		write_comps  => 'HBS',
+		def_comps    => 'HBS',
+		row_comps    => 'HBS');
+END;
+/
+
+BEGIN
+	sa_user_admin.set_compartments(
+		policy_name => 'ACCESS_HOP',
+		user_name    => 'TAI_VU',
+		read_comps   => 'HTV',
+		write_comps  => 'HTV',
+		def_comps    => 'HTV',
+		row_comps    => 'HTV');
+END;
+/
+
+BEGIN
+	sa_user_admin.set_compartments(
+		policy_name => 'ACCESS_HOP',
+		user_name    => 'TIEP_TAN',
+		read_comps   => 'HTT',
+		write_comps  => 'HTT',
+		def_comps    => 'HTT',
+		row_comps    => 'HTT');
+END;
+/
+
+BEGIN
+	sa_user_admin.set_compartments(
+		policy_name => 'ACCESS_HOP',
+		user_name    => 'BAN_THUOC',
+		read_comps   => 'HBT',
+		write_comps  => 'HBT',
+		def_comps    => 'HBT',
+		row_comps    => 'HBT');
+END;
+/
+
+BEGIN
+	sa_user_admin.set_compartments(
+		policy_name => 'ACCESS_HOP',
+		user_name    => 'KE_TOAN',
+		read_comps   => 'HKT',
+		write_comps  => 'HKT',
+		def_comps    => 'HKT',
+		row_comps    => 'HKT');
+END;
+/
+
+-- SET GROUPS
+
+BEGIN
+	sa_user_admin.set_groups(
+		policy_name => 'ACCESS_HOP',
+		user_name    => 'QUAN_LY_TAI_NGUYEN',
+		read_groups  => 'UK,CA',
+		write_groups => 'UK',
+		def_groups   => 'UK',
+		row_groups   => 'UK');
+END;
+/
+
+
+--- DROP TABLE POLICY
+BEGIN
+    SA_POLICY_ADMIN.REMOVE_TABLE_POLICY
+    (
+        policy_name  => 'ACCESS_HOP',
+        schema_name => 'DBA_USER',
+        table_name => 'CUOC_HOP',
+        drop_column => TRUE
+    );
+    EXCEPTION WHEN OTHERS THEN NULL;
+END;
+/
+
+-----------------------------
+
+BEGIN
+    SA_POLICY_ADMIN.APPLY_TABLE_POLICY
+    (
+        policy_name  => 'ACCESS_HOP',
+        schema_name => 'DBA_USER',
+        table_name => 'CUOC_HOP',
+        table_options => 'NO_CONTROL'
+    );
 END;
 /
