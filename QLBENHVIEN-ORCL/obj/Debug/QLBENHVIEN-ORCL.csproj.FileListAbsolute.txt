@@ -84,3 +84,32 @@ C:\Users\huy\Desktop\QLBENHVIEN-ORCL\obj\Debug\QLBENHVIEN-ORCL.csprojAssemblyRef
 \\vmware-host\Shared Folders\Downloads\bvien\QLBENHVIEN-ORCL\obj\Debug\QLBENHVIEN-ORCL.csproj.CopyComplete
 \\vmware-host\Shared Folders\Downloads\bvien\QLBENHVIEN-ORCL\obj\Debug\QLBENHVIEN-ORCL.exe
 \\vmware-host\Shared Folders\Downloads\bvien\QLBENHVIEN-ORCL\obj\Debug\QLBENHVIEN-ORCL.pdb
+C:\Users\huyng\Desktop\bvien-master\bvien-master\QLBENHVIEN-ORCL\bin\Debug\oci.dll
+C:\Users\huyng\Desktop\bvien-master\bvien-master\QLBENHVIEN-ORCL\bin\Debug\Oracle.DataAccess.dll
+C:\Users\huyng\Desktop\bvien-master\bvien-master\QLBENHVIEN-ORCL\bin\Debug\oramts.dll
+C:\Users\huyng\Desktop\bvien-master\bvien-master\QLBENHVIEN-ORCL\bin\Debug\oramts12.dll
+C:\Users\huyng\Desktop\bvien-master\bvien-master\QLBENHVIEN-ORCL\bin\Debug\oramtsus.dll
+C:\Users\huyng\Desktop\bvien-master\bvien-master\QLBENHVIEN-ORCL\bin\Debug\orannzsbb12.dll
+C:\Users\huyng\Desktop\bvien-master\bvien-master\QLBENHVIEN-ORCL\bin\Debug\oraocci12.dll
+C:\Users\huyng\Desktop\bvien-master\bvien-master\QLBENHVIEN-ORCL\bin\Debug\oraocci12d.dll
+C:\Users\huyng\Desktop\bvien-master\bvien-master\QLBENHVIEN-ORCL\bin\Debug\oraociei12.dll
+C:\Users\huyng\Desktop\bvien-master\bvien-master\QLBENHVIEN-ORCL\bin\Debug\oraons.dll
+C:\Users\huyng\Desktop\bvien-master\bvien-master\QLBENHVIEN-ORCL\bin\Debug\OraOps12.dll
+C:\Users\huyng\Desktop\bvien-master\bvien-master\QLBENHVIEN-ORCL\bin\Debug\QLBENHVIEN-ORCL.exe.config
+C:\Users\huyng\Desktop\bvien-master\bvien-master\QLBENHVIEN-ORCL\bin\Debug\QLBENHVIEN-ORCL.exe
+C:\Users\huyng\Desktop\bvien-master\bvien-master\QLBENHVIEN-ORCL\bin\Debug\QLBENHVIEN-ORCL.pdb
+C:\Users\huyng\Desktop\bvien-master\bvien-master\QLBENHVIEN-ORCL\obj\Debug\QLBENHVIEN-ORCL.csprojAssemblyReference.cache
+C:\Users\huyng\Desktop\bvien-master\bvien-master\QLBENHVIEN-ORCL\obj\Debug\QLBENHVIEN_ORCL.create.resources
+C:\Users\huyng\Desktop\bvien-master\bvien-master\QLBENHVIEN-ORCL\obj\Debug\QLBENHVIEN_ORCL.Form1.resources
+C:\Users\huyng\Desktop\bvien-master\bvien-master\QLBENHVIEN-ORCL\obj\Debug\QLBENHVIEN_ORCL.Grant_Option.resources
+C:\Users\huyng\Desktop\bvien-master\bvien-master\QLBENHVIEN-ORCL\obj\Debug\QLBENHVIEN_ORCL.Grant_privs.resources
+C:\Users\huyng\Desktop\bvien-master\bvien-master\QLBENHVIEN-ORCL\obj\Debug\QLBENHVIEN_ORCL.grant_revoke_objectPriv.resources
+C:\Users\huyng\Desktop\bvien-master\bvien-master\QLBENHVIEN-ORCL\obj\Debug\QLBENHVIEN_ORCL.Login.resources
+C:\Users\huyng\Desktop\bvien-master\bvien-master\QLBENHVIEN-ORCL\obj\Debug\QLBENHVIEN_ORCL.OBJECT_PRIV.resources
+C:\Users\huyng\Desktop\bvien-master\bvien-master\QLBENHVIEN-ORCL\obj\Debug\QLBENHVIEN_ORCL.privs.resources
+C:\Users\huyng\Desktop\bvien-master\bvien-master\QLBENHVIEN-ORCL\obj\Debug\QLBENHVIEN_ORCL.Properties.Resources.resources
+C:\Users\huyng\Desktop\bvien-master\bvien-master\QLBENHVIEN-ORCL\obj\Debug\QLBENHVIEN-ORCL.csproj.GenerateResource.cache
+C:\Users\huyng\Desktop\bvien-master\bvien-master\QLBENHVIEN-ORCL\obj\Debug\QLBENHVIEN-ORCL.csproj.CoreCompileInputs.cache
+C:\Users\huyng\Desktop\bvien-master\bvien-master\QLBENHVIEN-ORCL\obj\Debug\QLBENHVIEN-ORCL.csproj.CopyComplete
+C:\Users\huyng\Desktop\bvien-master\bvien-master\QLBENHVIEN-ORCL\obj\Debug\QLBENHVIEN-ORCL.exe
+C:\Users\huyng\Desktop\bvien-master\bvien-master\QLBENHVIEN-ORCL\obj\Debug\QLBENHVIEN-ORCL.pdb

@@ -23,7 +23,18 @@ namespace QLBENHVIEN_ORCL
         {
             LoadUser_gridView();
             LoadRole_gridView();
+            LoadAllEmp_gridView();
         }
+
+
+        public void LoadAllEmp_gridView()
+        {
+            DBUtils dbu = new DBUtils();
+            string query = "select * from DBA_BV01.NHANVIEN";
+            DataTable dt = dbu.ExecuteQuery(query);
+            dataGridView1.DataSource = dt;
+        }
+
 
         public void LoadUser_gridView()
         {
@@ -80,11 +91,29 @@ namespace QLBENHVIEN_ORCL
         {
             LoadUser_gridView();
             LoadRole_gridView();
+            LoadAllEmp_gridView();
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             Environment.Exit(0);
+        }
+       
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            dataGridView1.CurrentRow.Selected = true;
+            string manv = dataGridView1.Rows[e.RowIndex].Cells["MANV"].FormattedValue.ToString();
+            string pass = dataGridView1.Rows[e.RowIndex].Cells["PASSWORD"].FormattedValue.ToString();
+            if (pass.Length <= 31)
+            {
+                string query = "update dba_bv01.nhanvien set password = standard_hash((select password from dba_bv01.nhanvien where manv = " + manv + "), 'MD5') where manv = " + manv;
+                DBUtils db = new DBUtils();
+                if (db.ExecuteNonQuery(query))
+                {
+                    LoadAllEmp_gridView();
+                }
+            }
         }
     }
 }
