@@ -36,9 +36,9 @@
             // 
             this.grv_all_Objects.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grv_all_Objects.Location = new System.Drawing.Point(6, 107);
-            this.grv_all_Objects.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.grv_all_Objects.Margin = new System.Windows.Forms.Padding(2);
             this.grv_all_Objects.Name = "grv_all_Objects";
-            this.grv_all_Objects.RowHeadersWidth = 82;
+            this.grv_all_Objects.RowHeadersWidth = 20;
             this.grv_all_Objects.RowTemplate.Height = 33;
             this.grv_all_Objects.Size = new System.Drawing.Size(670, 358);
             this.grv_all_Objects.TabIndex = 0;
@@ -49,7 +49,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(682, 471);
             this.Controls.Add(this.grv_all_Objects);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "OBJECT_PRIV";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "QUẢN LÝ QUYỀN";

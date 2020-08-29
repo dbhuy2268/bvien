@@ -24,6 +24,7 @@ namespace QLBENHVIEN_ORCL
             }
             if (flag == 2)
             {
+                button2.Text = "XÓA ROLE NÀY";
                 curRole = inp;
                 label1.Text = "DANH SÁCH QUYỀN CỦA ROLE: " + curRole;
             }

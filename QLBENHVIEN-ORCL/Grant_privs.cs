@@ -189,48 +189,56 @@ namespace QLBENHVIEN_ORCL
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+            try
             {
-                dataGridView1.CurrentRow.Selected = true;
-                string priv = dataGridView1.Rows[e.RowIndex].Cells["PRIVILEGE"].FormattedValue.ToString();
-                string enabled = dataGridView1.Rows[e.RowIndex].Cells["ENABLED"].FormattedValue.ToString();
-
-                if (flag == 1)
+                if (dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
                 {
-                    if (enabled == "False")
+                    dataGridView1.CurrentRow.Selected = true;
+                    string priv = dataGridView1.Rows[e.RowIndex].Cells["PRIVILEGE"].FormattedValue.ToString();
+                    string enabled = dataGridView1.Rows[e.RowIndex].Cells["ENABLED"].FormattedValue.ToString();
+
+                    if (flag == 1)
                     {
-                        string query = "grant " + priv + " to " + Cur_user;
-                        Form go = new Grant_Option(this, 1, Cur_user, Cur_role, query);
-                        go.Show();
+                        if (enabled == "False")
+                        {
+                            string query = "grant " + priv + " to " + Cur_user;
+                            Form go = new Grant_Option(this, 1, Cur_user, Cur_role, query);
+                            go.Show();
+                        }
+                        else
+                        {
+                            string query = "revoke " + priv + " from " + Cur_user;
+                            DBUtils dbu = new DBUtils();
+                            DataTable dt = dbu.ExecuteQuery(query);
+                            LoadAllUserSysPriv_gridView();
+                            this.privcs.LoadUserSysPriv_gridView();
+                        }
                     }
+
                     else
                     {
-                        string query = "revoke " + priv + " from " + Cur_user;
-                        DBUtils dbu = new DBUtils();
-                        DataTable dt = dbu.ExecuteQuery(query);
-                        LoadAllUserSysPriv_gridView();
-                        this.privcs.LoadUserSysPriv_gridView();
-                    }
-                }
-
-                else
-                {
-                    if (enabled == "False")
-                    {
-                        string query = "grant " + priv + " to " + Cur_role;
-                        Form go = new Grant_Option(this, 2, Cur_user, Cur_role, query);
-                        go.Show();
-                    }
-                    else
-                    {
-                        string query = "revoke " + priv + " from " + Cur_role;
-                        DBUtils dbu = new DBUtils();
-                        DataTable dt = dbu.ExecuteQuery(query);
-                        LoadAllRoleSysPriv_gridView();
-                        this.privcs.LoadRoleSysPriv_gridView();
+                        if (enabled == "False")
+                        {
+                            string query = "grant " + priv + " to " + Cur_role;
+                            Form go = new Grant_Option(this, 2, Cur_user, Cur_role, query);
+                            go.Show();
+                        }
+                        else
+                        {
+                            string query = "revoke " + priv + " from " + Cur_role;
+                            DBUtils dbu = new DBUtils();
+                            DataTable dt = dbu.ExecuteQuery(query);
+                            LoadAllRoleSysPriv_gridView();
+                            this.privcs.LoadRoleSysPriv_gridView();
+                        }
                     }
                 }
             }
+            catch (Exception ex)
+            {
+                return;
+            }
+            
         }
 
         public DataTable data
@@ -265,159 +273,181 @@ namespace QLBENHVIEN_ORCL
 
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            //GRANT MỊN TRÊN CỘT, FLAG == 3 LÀ USER, FLAG == 4 LÀ ROLE
-            if (flag == 3 || flag == 4)
+            try
             {
-                // grant update(malichtruc) on lichtruc to ACCMASTER;
-                // dataGridView2[4, e.RowIndex].Value.ToString()
-                if (e.ColumnIndex == 0) //SELECT
+                //GRANT MỊN TRÊN CỘT, FLAG == 3 LÀ USER, FLAG == 4 LÀ ROLE
+                if (flag == 3 || flag == 4)
                 {
-                    List<string> kq = get_CurrentViewStatus();
-                    if (kq.Contains(dataGridView2[4, e.RowIndex].Value.ToString()))
+                    // grant update(malichtruc) on lichtruc to ACCMASTER;
+                    // dataGridView2[4, e.RowIndex].Value.ToString()
+                    if (e.ColumnIndex == 0) //SELECT
                     {
-                        DialogResult res = MessageBox.Show("DA TON TAI VIEW VOI QUYEN NAY. REVOKE?", "REVOKE?", MessageBoxButtons.YesNo);
-                        if (res == DialogResult.Yes)
+                        List<string> kq = get_CurrentViewStatus();
+                        if (kq.Contains(dataGridView2[4, e.RowIndex].Value.ToString()))
                         {
-                            kq.Remove(dataGridView2[4, e.RowIndex].Value.ToString());
-                            string query_revoke = "CREATE OR REPLACE VIEW " + (flag == 3 ? Cur_user : Cur_role) + "_" + tableName + " as " + "select ";
-                            for (int i = 1; i < kq.Count - 1; i++)
+                            DialogResult res = MessageBox.Show("DA TON TAI VIEW VOI QUYEN NAY. REVOKE?", "REVOKE?", MessageBoxButtons.YesNo);
+                            if (res == DialogResult.Yes)
                             {
-                                query_revoke += kq[i] + ", ";
-                            }
-
-                            query_revoke += kq[kq.Count - 1];
-                            query_revoke += " from " + tableName;
-
-                            DBUtils dbu = new DBUtils();
-
-                            if (kq.Count == 1)
-                            {
-                                query_revoke = "DROP VIEW " + (flag == 3 ? Cur_user : Cur_role) + "_" + tableName;
-                            }
-                            MessageBox.Show(query_revoke);
-                            if (dbu.ExecuteNonQuery(query_revoke))
-                            {
-                                MessageBox.Show("REVOKE THANH CONG");
-                                privcs.loadDT();
-                                if (flag == 1 || flag == 3)
+                                kq.Remove(dataGridView2[4, e.RowIndex].Value.ToString());
+                                string query_revoke = "CREATE OR REPLACE VIEW " + (flag == 3 ? Cur_user : Cur_role) + "_" + tableName + " as " + "select ";
+                                for (int i = 1; i < kq.Count - 1; i++)
                                 {
-                                    privcs.LoadUserObjPriv_gridView();
+                                    query_revoke += kq[i] + ", ";
                                 }
-                                if (flag == 2 || flag == 4)
-                                {
-                                    privcs.LoadRoleObjPriv_gridView();
-                                }
-                                return;
-                            }
-                            MessageBox.Show("REVOKE THAT BAI");
 
+                                query_revoke += kq[kq.Count - 1];
+                                query_revoke += " from " + tableName;
+
+                                DBUtils dbu = new DBUtils();
+
+                                if (kq.Count == 1)
+                                {
+                                    query_revoke = "DROP VIEW " + (flag == 3 ? Cur_user : Cur_role) + "_" + tableName;
+                                }
+                                MessageBox.Show(query_revoke);
+                                if (dbu.ExecuteNonQuery(query_revoke))
+                                {
+                                    MessageBox.Show("REVOKE THANH CONG");
+                                    privcs.loadDT();
+                                    if (flag == 1 || flag == 3)
+                                    {
+                                        privcs.LoadUserObjPriv_gridView();
+                                    }
+                                    if (flag == 2 || flag == 4)
+                                    {
+                                        privcs.LoadRoleObjPriv_gridView();
+                                    }
+                                    return;
+                                }
+                                MessageBox.Show("REVOKE THAT BAI");
+
+                            }
+                            return;
                         }
+                        kq.Add(dataGridView2[4, e.RowIndex].Value.ToString());
+                        string query = " VIEW " + (flag == 3 ? Cur_user : Cur_role) + "_" + tableName + " as " + "select ";
+                        for (int i = 1; i < kq.Count - 1; i++)
+                        {
+                            query += kq[i] + ", ";
+                        }
+
+                        query += kq[kq.Count - 1];
+                        query += " from " + tableName;
+
+                        grant_revoke_objectPriv grant_Revoke_ObjectPriv = new grant_revoke_objectPriv(this, privcs, query, Cur_user, Cur_role, (flag == 4 ? 6 : 5), tableName);
+                        grant_Revoke_ObjectPriv.Show();
+                    }
+                    if (e.ColumnIndex == 1 || e.ColumnIndex == 2)
+                    {
+                        MessageBox.Show("KHONG HO TRO INSERT VA DELETE MIN TREN COT");
                         return;
                     }
-                    kq.Add(dataGridView2[4, e.RowIndex].Value.ToString());
-                    string query = " VIEW " + (flag == 3 ? Cur_user : Cur_role) + "_" + tableName + " as " + "select ";
-                    for (int i = 1; i < kq.Count - 1; i++)
+
+                    if (e.ColumnIndex == 3) //UPDATE
                     {
-                        query += kq[i] + ", ";
+                        string query = " UPDATE(" + dataGridView2[4, e.RowIndex].Value.ToString() + ") on " + tableName;
+
+                        grant_revoke_objectPriv grant_Revoke_ObjectPriv = new grant_revoke_objectPriv(this, privcs, query, Cur_user, Cur_role, flag);
+                        grant_Revoke_ObjectPriv.Show();
                     }
-
-                    query += kq[kq.Count - 1];
-                    query += " from " + tableName;
-
-                    grant_revoke_objectPriv grant_Revoke_ObjectPriv = new grant_revoke_objectPriv(this, privcs, query, Cur_user, Cur_role, (flag == 4 ? 6 : 5), tableName);
-                    grant_Revoke_ObjectPriv.Show();
                 }
-                if (e.ColumnIndex == 1 || e.ColumnIndex == 2)
+                else
                 {
-                    MessageBox.Show("KHONG HO TRO INSERT VA DELETE MIN TREN COT");
-                    return;
-                }
-
-                if (e.ColumnIndex == 3) //UPDATE
-                {
-                    string query = " UPDATE(" + dataGridView2[4, e.RowIndex].Value.ToString() + ") on " + tableName;
-
-                    grant_revoke_objectPriv grant_Revoke_ObjectPriv = new grant_revoke_objectPriv(this, privcs, query, Cur_user, Cur_role, flag);
-                    grant_Revoke_ObjectPriv.Show();
+                    if (e.ColumnIndex == 0) //SELECT
+                    {
+                        string query = " SELECT ON " + dataGridView2[5, e.RowIndex].Value.ToString() + "." + dataGridView2[4, e.RowIndex].Value.ToString();
+                        grant_revoke_objectPriv grant_Revoke_ObjectPriv = new grant_revoke_objectPriv(this, privcs, query, Cur_user, Cur_role, (flag == 2 ? 4 : 3));
+                        grant_Revoke_ObjectPriv.Show();
+                    }
+                    if (e.ColumnIndex == 1) //INSERT
+                    {
+                        string query = " INSERT ON " + dataGridView2[5, e.RowIndex].Value.ToString() + "." + dataGridView2[4, e.RowIndex].Value.ToString();
+                        grant_revoke_objectPriv grant_Revoke_ObjectPriv = new grant_revoke_objectPriv(this, privcs, query, Cur_user, Cur_role, (flag == 2 ? 4 : 3));
+                        grant_Revoke_ObjectPriv.Show();
+                    }
+                    if (e.ColumnIndex == 2) //DELETE
+                    {
+                        string query = " DELETE ON " + dataGridView2[5, e.RowIndex].Value.ToString() + "." + dataGridView2[4, e.RowIndex].Value.ToString();
+                        grant_revoke_objectPriv grant_Revoke_ObjectPriv = new grant_revoke_objectPriv(this, privcs, query, Cur_user, Cur_role, (flag == 2 ? 4 : 3));
+                        grant_Revoke_ObjectPriv.Show();
+                    }
+                    if (e.ColumnIndex == 3) //UPDATE
+                    {
+                        string query = " UPDATE ON " + dataGridView2[5, e.RowIndex].Value.ToString() + "." + dataGridView2[4, e.RowIndex].Value.ToString();
+                        grant_revoke_objectPriv grant_Revoke_ObjectPriv = new grant_revoke_objectPriv(this, privcs, query, Cur_user, Cur_role, (flag == 2 ? 4 : 3));
+                        grant_Revoke_ObjectPriv.Show();
+                    }
                 }
             }
-            else
+            catch (Exception ex)
             {
-                if (e.ColumnIndex == 0) //SELECT
-                {
-                    string query = " SELECT ON " + dataGridView2[5, e.RowIndex].Value.ToString() + "." + dataGridView2[4, e.RowIndex].Value.ToString();
-                    grant_revoke_objectPriv grant_Revoke_ObjectPriv = new grant_revoke_objectPriv(this, privcs, query, Cur_user, Cur_role, (flag == 2 ? 4 : 3));
-                    grant_Revoke_ObjectPriv.Show();
-                }
-                if (e.ColumnIndex == 1) //INSERT
-                {
-                    string query = " INSERT ON " + dataGridView2[5, e.RowIndex].Value.ToString() + "." + dataGridView2[4, e.RowIndex].Value.ToString();
-                    grant_revoke_objectPriv grant_Revoke_ObjectPriv = new grant_revoke_objectPriv(this, privcs, query, Cur_user, Cur_role, (flag == 2 ? 4 : 3));
-                    grant_Revoke_ObjectPriv.Show();
-                }
-                if (e.ColumnIndex == 2) //DELETE
-                {
-                    string query = " DELETE ON " + dataGridView2[5, e.RowIndex].Value.ToString() + "." + dataGridView2[4, e.RowIndex].Value.ToString();
-                    grant_revoke_objectPriv grant_Revoke_ObjectPriv = new grant_revoke_objectPriv(this, privcs, query, Cur_user, Cur_role, (flag == 2 ? 4 : 3));
-                    grant_Revoke_ObjectPriv.Show();
-                }
-                if (e.ColumnIndex == 3) //UPDATE
-                {
-                    string query = " UPDATE ON " + dataGridView2[5, e.RowIndex].Value.ToString() + "." + dataGridView2[4, e.RowIndex].Value.ToString();
-                    grant_revoke_objectPriv grant_Revoke_ObjectPriv = new grant_revoke_objectPriv(this, privcs, query, Cur_user, Cur_role, (flag == 2 ? 4 : 3));
-                    grant_Revoke_ObjectPriv.Show();
-                }
+                return;
             }
+            
         }
 
         private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            //SELECT column_name, data_type, data_length FROM USER_TAB_COLUMNS WHERE TABLE_NAME = ''
-            if (e.ColumnIndex == 0) //SELECT
+            try
+            {
+                //SELECT column_name, data_type, data_length FROM USER_TAB_COLUMNS WHERE TABLE_NAME = ''
+                if (e.ColumnIndex == 0) //SELECT
+                {
+                    return;
+                }
+                if (e.ColumnIndex == 1) //INSERT
+                {
+                    return;
+                }
+                if (e.ColumnIndex == 2) //DELETE
+                {
+                    return;
+                }
+                if (e.ColumnIndex == 3) //UPDATE
+                {
+                    return;
+                }
+                Grant_privs new_gp = new Grant_privs(privcs, (flag == 1 ? 3 : 4), Cur_user, Cur_role, dataGridView2.Rows[e.RowIndex].Cells["OBJECT_NAME"].Value.ToString());
+                new_gp.tabControl1.TabPages.Remove(new_gp.tabPage1);
+                new_gp.ShowDialog();
+            }
+            catch (Exception ex)
             {
                 return;
             }
-            if (e.ColumnIndex == 1) //INSERT
-            {
-                return;
-            }
-            if (e.ColumnIndex == 2) //DELETE
-            {
-                return;
-            }
-            if (e.ColumnIndex == 3) //UPDATE
-            {
-                return;
-            }
-            Grant_privs new_gp = new Grant_privs(privcs, (flag == 1 ? 3 : 4), Cur_user, Cur_role, dataGridView2.Rows[e.RowIndex].Cells["OBJECT_NAME"].Value.ToString());
-            new_gp.tabControl1.TabPages.Remove(new_gp.tabPage1);
-            new_gp.ShowDialog();
         }
 
         private void dataGridView3_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (dataGridView3.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+            try
             {
-                dataGridView3.CurrentRow.Selected = true;
-                string Granted_role = dataGridView3.Rows[e.RowIndex].Cells["GRANTED_ROLE"].FormattedValue.ToString();
-                string enabled = dataGridView3.Rows[e.RowIndex].Cells["ENABLED"].FormattedValue.ToString();
+                if (dataGridView3.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+                {
+                    dataGridView3.CurrentRow.Selected = true;
+                    string Granted_role = dataGridView3.Rows[e.RowIndex].Cells["GRANTED_ROLE"].FormattedValue.ToString();
+                    string enabled = dataGridView3.Rows[e.RowIndex].Cells["ENABLED"].FormattedValue.ToString();
 
-                string query;
-                if (enabled == "False")
-                {
-                    query = "grant " + Granted_role + " to " + Cur_user;
-                    Grant_Option go = new Grant_Option(this, 3, Cur_user, Cur_role, query);
-                    go.Show();
-                }
-                else
-                {
-                    query = "revoke " + Granted_role + " from " + Cur_user;
-                    DBUtils dbu = new DBUtils();
-                    if (dbu.ExecuteNonQuery(query))
+                    string query;
+                    if (enabled == "False")
                     {
-                        this.LoadAllRole_ForGrantUser();
+                        query = "grant " + Granted_role + " to " + Cur_user;
+                        Grant_Option go = new Grant_Option(this, 3, Cur_user, Cur_role, query);
+                        go.Show();
+                    }
+                    else
+                    {
+                        query = "revoke " + Granted_role + " from " + Cur_user;
+                        DBUtils dbu = new DBUtils();
+                        if (dbu.ExecuteNonQuery(query))
+                        {
+                            this.LoadAllRole_ForGrantUser();
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                return;
             }
         }
 

@@ -49,5 +49,10 @@ namespace QLBENHVIEN_ORCL
             this.StartPosition = FormStartPosition.CenterParent;
             this.AcceptButton = button1;
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

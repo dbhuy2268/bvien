@@ -512,23 +512,23 @@ INSERT INTO "CUOCHOP" ("MACUOCHOP", "NVCHUTRI", "NOIDUNG") VALUES (9, 9, 'THI NG
 /*==============================================================*/
 INSERT INTO THONGTINKHAMBENH ("MATHONGTINKHAMBENH", "MABENHNHAN", "BACSI", "NGAYKHAM", "TRIEUCHUNG", "LOIDAN") VALUES (0, 3, 7, '2000-10-31', 'DAU BUNG', 'UONG THUOC DFQAA');
 
-INSERT INTO THONGTINKHAMBENH ("MATHONGTINKHAMBENH", "MABENHNHAN", "BACSI", "NGAYKHAM", "TRIEUCHUNG", "LOIDAN") VALUES (1, 2, 6, '2000-1-1', 'NHUC DAU', 'LUYEN TAP NHIEU');
+INSERT INTO THONGTINKHAMBENH ("MATHONGTINKHAMBENH", "MABENHNHAN", "BACSI", "NGAYKHAM", "TRIEUCHUNG", "LOIDAN") VALUES (1, 2, 8, '2000-1-1', 'NHUC DAU', 'LUYEN TAP NHIEU');
 
-INSERT INTO THONGTINKHAMBENH ("MATHONGTINKHAMBENH", "MABENHNHAN", "BACSI", "NGAYKHAM", "TRIEUCHUNG", "LOIDAN") VALUES (2, 8, 6, '2000-8-28', 'CHONG MAT', 'HAN CHE DI LAI');
+INSERT INTO THONGTINKHAMBENH ("MATHONGTINKHAMBENH", "MABENHNHAN", "BACSI", "NGAYKHAM", "TRIEUCHUNG", "LOIDAN") VALUES (2, 8, 8, '2000-8-28', 'CHONG MAT', 'HAN CHE DI LAI');
 
 INSERT INTO THONGTINKHAMBENH ("MATHONGTINKHAMBENH", "MABENHNHAN", "BACSI", "NGAYKHAM", "TRIEUCHUNG", "LOIDAN") VALUES (3, 2, 7, '2000-2-12', 'BUON NON', 'UONG NHIEU NUOC');
 
-INSERT INTO THONGTINKHAMBENH ("MATHONGTINKHAMBENH", "MABENHNHAN", "BACSI", "NGAYKHAM", "TRIEUCHUNG", "LOIDAN") VALUES (4, 1, 6, '2000-8-31', 'NGU KHONG NGON', 'HAN CHE UONG RUOU BIA');
+INSERT INTO THONGTINKHAMBENH ("MATHONGTINKHAMBENH", "MABENHNHAN", "BACSI", "NGAYKHAM", "TRIEUCHUNG", "LOIDAN") VALUES (4, 1, 8, '2000-8-31', 'NGU KHONG NGON', 'HAN CHE UONG RUOU BIA');
 
 INSERT INTO THONGTINKHAMBENH ("MATHONGTINKHAMBENH", "MABENHNHAN", "BACSI", "NGAYKHAM", "TRIEUCHUNG", "LOIDAN") VALUES (5, 7, 7, '2000-1-7', 'GAY XUONG', 'HAN CHE DI LAI');
 
-INSERT INTO THONGTINKHAMBENH ("MATHONGTINKHAMBENH", "MABENHNHAN", "BACSI", "NGAYKHAM", "TRIEUCHUNG", "LOIDAN") VALUES (6, 2, 6, '2000-3-14', 'THIEU MAU', 'KHONG AN THUC AN QUA CUNG');
+INSERT INTO THONGTINKHAMBENH ("MATHONGTINKHAMBENH", "MABENHNHAN", "BACSI", "NGAYKHAM", "TRIEUCHUNG", "LOIDAN") VALUES (6, 2, 8, '2000-3-14', 'THIEU MAU', 'KHONG AN THUC AN QUA CUNG');
 
 INSERT INTO THONGTINKHAMBENH ("MATHONGTINKHAMBENH", "MABENHNHAN", "BACSI", "NGAYKHAM", "TRIEUCHUNG", "LOIDAN") VALUES (7, 2, 7, '2000-12-25', 'MAT NGU', 'LUYEN TAP THE THAO DIEU DO');
 
-INSERT INTO THONGTINKHAMBENH ("MATHONGTINKHAMBENH", "MABENHNHAN", "BACSI", "NGAYKHAM", "TRIEUCHUNG", "LOIDAN") VALUES (8, 9, 6, '2000-4-19', 'TE CHAN TAY', 'VAN DONG NHIEU');
+INSERT INTO THONGTINKHAMBENH ("MATHONGTINKHAMBENH", "MABENHNHAN", "BACSI", "NGAYKHAM", "TRIEUCHUNG", "LOIDAN") VALUES (8, 9, 8, '2000-4-19', 'TE CHAN TAY', 'VAN DONG NHIEU');
 
-INSERT INTO THONGTINKHAMBENH ("MATHONGTINKHAMBENH", "MABENHNHAN", "BACSI", "NGAYKHAM", "TRIEUCHUNG", "LOIDAN") VALUES (9, 5, 6, '2000-4-23', 'DAU BUNG AM I', 'HAN CHE AN DAU MO');
+INSERT INTO THONGTINKHAMBENH ("MATHONGTINKHAMBENH", "MABENHNHAN", "BACSI", "NGAYKHAM", "TRIEUCHUNG", "LOIDAN") VALUES (9, 5, 8, '2000-4-23', 'DAU BUNG AM I', 'HAN CHE AN DAU MO');
 
 /*==============================================================*/
 /* Generate test data for the table "CHITIETTHUOC_HD".          */
@@ -753,10 +753,17 @@ GRANT BAN_THUOC TO BT001;
 /
 
 /*==============================================================*/
+
+
 /* 								VPD     					    */
+
+
 /*==============================================================*/
 
 /*ADD VPD FUNCTION VPD BAC SI*/
+
+
+-- BS -> THONGTINKHAMBENH CUA CHINH MINH
 CREATE OR REPLACE FUNCTION DBA_BV01.VPD_BACSI (
     P_SCHEMA IN VARCHAR2,
     P_OBJ IN VARCHAR2)
@@ -776,6 +783,16 @@ CREATE OR REPLACE FUNCTION DBA_BV01.VPD_BACSI (
     END;
 /
 
+BEGIN
+	DBMS_RLS.DROP_POLICY(
+		'DBA_BV01',
+		'THONGTINKHAMBENH', 
+		'BS_POLICY');
+
+	EXCEPTION WHEN OTHERS THEN NULL;
+END;
+/
+
 /*ADD VPD POLICIES*/
 BEGIN
 DBMS_RLS.ADD_POLICY(
@@ -789,8 +806,85 @@ DBMS_RLS.ADD_POLICY(
 END;
 /
 
+-- BS --> CHITIETTHUOCHD CUA CHINH MINH
+
+CREATE OR REPLACE FUNCTION DBA_BV01.VPD_BACSI1 (
+    P_SCHEMA IN VARCHAR2,
+    P_OBJ IN VARCHAR2)
+    RETURN VARCHAR2
+    AS
+    CURR_USER VARCHAR2(50);
+    PREFIX VARCHAR2(2);
+    BEGIN
+        CURR_USER := SYS_CONTEXT('USERENV', 'SESSION_USER');
+        PREFIX := SUBSTR(CURR_USER, 1, 2);
+        IF (PREFIX = 'BS') 
+        THEN
+            RETURN 'MATHONGTINKHAMBENH IN (
+                            SELECT TT.MATHONGTINKHAMBENH 
+                            FROM DBA_BV01.THONGTINKHAMBENH TT
+                            WHERE TT.BACSI IN (
+                                        SELECT NV.MANV 
+                                        FROM DBA_BV01.NHANVIEN NV
+                                        WHERE NV.USERNAME = ' || CHR(39) || CURR_USER || CHR(39) || '))';
+        ELSE 
+            RETURN '';
+        END IF;
+    END;
+/
+
+BEGIN
+	DBMS_RLS.DROP_POLICY(
+		'DBA_BV01',
+		'CHITIETTHUOCHD', 
+		'BS_POLICY1');
+
+	EXCEPTION WHEN OTHERS THEN NULL;
+END;
+/
+
+/*ADD VPD POLICIES*/
+BEGIN
+DBMS_RLS.ADD_POLICY(
+	OBJECT_SCHEMA => 'DBA_BV01',
+    OBJECT_NAME => 'CHITIETTHUOCHD',
+    POLICY_NAME => 'BS_POLICY1',
+    FUNCTION_SCHEMA => 'DBA_BV01',
+    POLICY_FUNCTION => 'VPD_BACSI1',
+    STATEMENT_TYPES => 'select',
+    UPDATE_CHECK => TRUE);
+END;
+/
+
+BEGIN
+	DBMS_RLS.DROP_POLICY(
+		'DBA_BV01',
+		'CHITIETDICHVUHD', 
+		'BS_POLICY2');
+
+	EXCEPTION WHEN OTHERS THEN NULL;
+END;
+/
+
+/*ADD VPD POLICIES*/
+BEGIN
+DBMS_RLS.ADD_POLICY(
+	OBJECT_SCHEMA => 'DBA_BV01',
+    OBJECT_NAME => 'CHITIETDICHVUHD',
+    POLICY_NAME => 'BS_POLICY2',
+    FUNCTION_SCHEMA => 'DBA_BV01',
+    POLICY_FUNCTION => 'VPD_BACSI1',
+    STATEMENT_TYPES => 'select',
+    UPDATE_CHECK => TRUE);
+END;
+/
+
 /*==============================================================*/
+
+
 /* 								OLS     					    */
+
+
 /*==============================================================*/
 
 ALTER USER LBACSYS ACCOUNT UNLOCK IDENTIFIED BY 1231;
@@ -1122,220 +1216,304 @@ END;
 
 -- LEVEL CUA ROLE
 
-BEGIN
-	sa_user_admin.set_levels(
-		policy_name => 'ACCESS_HOP',
-		user_name    => 'QUAN_LY_TAI_NGUYEN',
-		max_level    => 'QL',
-		min_level    => 'NV',
-		def_level    => 'QL',
-		row_level    => 'QL');
-END;
+-- BEGIN
+-- 	sa_user_admin.set_levels(
+-- 		policy_name => 'ACCESS_HOP',
+-- 		user_name    => 'QUAN_LY_TAI_NGUYEN',
+-- 		max_level    => 'QL',
+-- 		min_level    => 'NV',
+-- 		def_level    => 'QL',
+-- 		row_level    => 'QL');
+-- END;
+-- /
+
+-- BEGIN
+-- 	sa_user_admin.set_levels(
+-- 		policy_name => 'ACCESS_HOP',
+-- 		user_name    => 'QUAN_LY_CHUYEN_MON',
+-- 		max_level    => 'QL',
+-- 		min_level    => 'NV',
+-- 		def_level    => 'QL',
+-- 		row_level    => 'QL');
+-- END;
+-- /
+
+-- BEGIN
+-- 	sa_user_admin.set_levels(
+-- 		policy_name => 'ACCESS_HOP',
+-- 		user_name    => 'QUAN_LY_TAI_VU',
+-- 		max_level    => 'QL',
+-- 		min_level    => 'NV',
+-- 		def_level    => 'QL',
+-- 		row_level    => 'QL');
+-- END;
+-- /
+
+-- BEGIN
+-- 	sa_user_admin.set_levels(
+-- 		policy_name => 'ACCESS_HOP',
+-- 		user_name    => 'BAC_SI',
+-- 		max_level    => 'NV',
+-- 		min_level    => 'NV',
+-- 		def_level    => 'NV',
+-- 		row_level    => 'NV');
+-- END;
+-- /
+
+-- BEGIN
+-- 	sa_user_admin.set_levels(
+-- 		policy_name => 'ACCESS_HOP',
+-- 		user_name    => 'TAI_VU',
+-- 		max_level    => 'NV',
+-- 		min_level    => 'NV',
+-- 		def_level    => 'NV',
+-- 		row_level    => 'NV');
+-- END;
+-- /
+
+-- BEGIN
+-- 	sa_user_admin.set_levels(
+-- 		policy_name => 'ACCESS_HOP',
+-- 		user_name    => 'TIEP_TAN',
+-- 		max_level    => 'NV',
+-- 		min_level    => 'NV',
+-- 		def_level    => 'NV',
+-- 		row_level    => 'NV');
+-- END;
+-- /
+
+-- BEGIN
+-- 	sa_user_admin.set_levels(
+-- 		policy_name => 'ACCESS_HOP',
+-- 		user_name    => 'BAN_THUOC',
+-- 		max_level    => 'NV',
+-- 		min_level    => 'NV',
+-- 		def_level    => 'NV',
+-- 		row_level    => 'NV');
+-- END;
+-- /
+
+-- BEGIN
+-- 	sa_user_admin.set_levels(
+-- 		policy_name => 'ACCESS_HOP',
+-- 		user_name    => 'KE_TOAN',
+-- 		max_level    => 'NV',
+-- 		min_level    => 'NV',
+-- 		def_level    => 'NV',
+-- 		row_level    => 'NV');
+-- END;
+-- /
+
+-- -- COMPARTMENT CUA ROLE
+
+-- BEGIN
+-- 	sa_user_admin.set_compartments(
+-- 		policy_name => 'ACCESS_HOP',
+-- 		user_name    => 'QUAN_LY_TAI_NGUYEN',
+-- 		read_comps   => 'HQL, HBS, HTT, HTV, HBT, HKT',
+-- 		write_comps  => 'HQL, HBS, HTT, HTV, HBT, HKT',
+-- 		def_comps    => 'HQL',
+-- 		row_comps    => 'HQL');
+-- END;
+-- /
+
+-- BEGIN
+-- 	sa_user_admin.set_compartments(
+-- 		policy_name => 'ACCESS_HOP',
+-- 		user_name    => 'QUAN_LY_CHUYEN_MON',
+-- 		read_comps   => 'HQL, HBS, HTT, HTV, HBT, HKT',
+-- 		write_comps  => 'HQL, HBS, HTT, HTV, HBT, HKT',
+-- 		def_comps    => 'HQL',
+-- 		row_comps    => 'HQL');
+-- END;
+-- /
+
+-- BEGIN
+-- 	sa_user_admin.set_compartments(
+-- 		policy_name => 'ACCESS_HOP',
+-- 		user_name    => 'QUAN_LY_TAI_VU',
+-- 		read_comps   => 'HQL, HBS, HTT, HTV, HBT, HKT',
+-- 		write_comps  => 'HQL, HBS, HTT, HTV, HBT, HKT',
+-- 		def_comps    => 'HQL',
+-- 		row_comps    => 'HQL');
+-- END;
+-- /
+
+-- BEGIN
+-- 	sa_user_admin.set_compartments(
+-- 		policy_name => 'ACCESS_HOP',
+-- 		user_name    => 'BAC_SI',
+-- 		read_comps   => 'HBS',
+-- 		write_comps  => 'HBS',
+-- 		def_comps    => 'HBS',
+-- 		row_comps    => 'HBS');
+-- END;
+-- /
+
+-- BEGIN
+-- 	sa_user_admin.set_compartments(
+-- 		policy_name => 'ACCESS_HOP',
+-- 		user_name    => 'TAI_VU',
+-- 		read_comps   => 'HTV',
+-- 		write_comps  => 'HTV',
+-- 		def_comps    => 'HTV',
+-- 		row_comps    => 'HTV');
+-- END;
+-- /
+
+-- BEGIN
+-- 	sa_user_admin.set_compartments(
+-- 		policy_name => 'ACCESS_HOP',
+-- 		user_name    => 'TIEP_TAN',
+-- 		read_comps   => 'HTT',
+-- 		write_comps  => 'HTT',
+-- 		def_comps    => 'HTT',
+-- 		row_comps    => 'HTT');
+-- END;
+-- /
+
+-- BEGIN
+-- 	sa_user_admin.set_compartments(
+-- 		policy_name => 'ACCESS_HOP',
+-- 		user_name    => 'BAN_THUOC',
+-- 		read_comps   => 'HBT',
+-- 		write_comps  => 'HBT',
+-- 		def_comps    => 'HBT',
+-- 		row_comps    => 'HBT');
+-- END;
+-- /
+
+-- BEGIN
+-- 	sa_user_admin.set_compartments(
+-- 		policy_name => 'ACCESS_HOP',
+-- 		user_name    => 'KE_TOAN',
+-- 		read_comps   => 'HKT',
+-- 		write_comps  => 'HKT',
+-- 		def_comps    => 'HKT',
+-- 		row_comps    => 'HKT');
+-- END;
+-- /
+
+-- -- SET GROUPS
+
+-- BEGIN
+-- 	sa_user_admin.set_groups(
+-- 		policy_name => 'ACCESS_HOP',
+-- 		user_name    => 'QUAN_LY_TAI_NGUYEN',
+-- 		read_groups  => 'UK,CA',
+-- 		write_groups => 'UK',
+-- 		def_groups   => 'UK',
+-- 		row_groups   => 'UK');
+-- END;
+-- /
+
+
+-- --- DROP TABLE POLICY
+-- BEGIN
+--     SA_POLICY_ADMIN.REMOVE_TABLE_POLICY
+--     (
+--         policy_name  => 'ACCESS_HOP',
+--         schema_name => 'DBA_USER',
+--         table_name => 'CUOC_HOP',
+--         drop_column => TRUE
+--     );
+--     EXCEPTION WHEN OTHERS THEN NULL;
+-- END;
+-- /
+
+-- -----------------------------
+
+-- BEGIN
+--     SA_POLICY_ADMIN.APPLY_TABLE_POLICY
+--     (
+--         policy_name  => 'ACCESS_HOP',
+--         schema_name => 'DBA_USER',
+--         table_name => 'CUOC_HOP',
+--         table_options => 'NO_CONTROL'
+--     );
+-- END;
+-- /
+
+-- AUDIT
+CONN SYS/1231 AS SYSDBA;
+
+grant execute on DBMS_FGA to DBA_BV01;
+grant AUDIT_ADMIN to DBA_BV01;
+grant AUDIT_VIEWER to DBA_BV01;
 /
 
 BEGIN
-	sa_user_admin.set_levels(
-		policy_name => 'ACCESS_HOP',
-		user_name    => 'QUAN_LY_CHUYEN_MON',
-		max_level    => 'QL',
-		min_level    => 'NV',
-		def_level    => 'QL',
-		row_level    => 'QL');
-END;
-/
-
-BEGIN
-	sa_user_admin.set_levels(
-		policy_name => 'ACCESS_HOP',
-		user_name    => 'QUAN_LY_TAI_VU',
-		max_level    => 'QL',
-		min_level    => 'NV',
-		def_level    => 'QL',
-		row_level    => 'QL');
-END;
-/
-
-BEGIN
-	sa_user_admin.set_levels(
-		policy_name => 'ACCESS_HOP',
-		user_name    => 'BAC_SI',
-		max_level    => 'NV',
-		min_level    => 'NV',
-		def_level    => 'NV',
-		row_level    => 'NV');
-END;
-/
-
-BEGIN
-	sa_user_admin.set_levels(
-		policy_name => 'ACCESS_HOP',
-		user_name    => 'TAI_VU',
-		max_level    => 'NV',
-		min_level    => 'NV',
-		def_level    => 'NV',
-		row_level    => 'NV');
-END;
-/
-
-BEGIN
-	sa_user_admin.set_levels(
-		policy_name => 'ACCESS_HOP',
-		user_name    => 'TIEP_TAN',
-		max_level    => 'NV',
-		min_level    => 'NV',
-		def_level    => 'NV',
-		row_level    => 'NV');
-END;
-/
-
-BEGIN
-	sa_user_admin.set_levels(
-		policy_name => 'ACCESS_HOP',
-		user_name    => 'BAN_THUOC',
-		max_level    => 'NV',
-		min_level    => 'NV',
-		def_level    => 'NV',
-		row_level    => 'NV');
-END;
-/
-
-BEGIN
-	sa_user_admin.set_levels(
-		policy_name => 'ACCESS_HOP',
-		user_name    => 'KE_TOAN',
-		max_level    => 'NV',
-		min_level    => 'NV',
-		def_level    => 'NV',
-		row_level    => 'NV');
-END;
-/
-
--- COMPARTMENT CUA ROLE
-
-BEGIN
-	sa_user_admin.set_compartments(
-		policy_name => 'ACCESS_HOP',
-		user_name    => 'QUAN_LY_TAI_NGUYEN',
-		read_comps   => 'HQL, HBS, HTT, HTV, HBT, HKT',
-		write_comps  => 'HQL, HBS, HTT, HTV, HBT, HKT',
-		def_comps    => 'HQL',
-		row_comps    => 'HQL');
-END;
-/
-
-BEGIN
-	sa_user_admin.set_compartments(
-		policy_name => 'ACCESS_HOP',
-		user_name    => 'QUAN_LY_CHUYEN_MON',
-		read_comps   => 'HQL, HBS, HTT, HTV, HBT, HKT',
-		write_comps  => 'HQL, HBS, HTT, HTV, HBT, HKT',
-		def_comps    => 'HQL',
-		row_comps    => 'HQL');
-END;
-/
-
-BEGIN
-	sa_user_admin.set_compartments(
-		policy_name => 'ACCESS_HOP',
-		user_name    => 'QUAN_LY_TAI_VU',
-		read_comps   => 'HQL, HBS, HTT, HTV, HBT, HKT',
-		write_comps  => 'HQL, HBS, HTT, HTV, HBT, HKT',
-		def_comps    => 'HQL',
-		row_comps    => 'HQL');
-END;
-/
-
-BEGIN
-	sa_user_admin.set_compartments(
-		policy_name => 'ACCESS_HOP',
-		user_name    => 'BAC_SI',
-		read_comps   => 'HBS',
-		write_comps  => 'HBS',
-		def_comps    => 'HBS',
-		row_comps    => 'HBS');
-END;
-/
-
-BEGIN
-	sa_user_admin.set_compartments(
-		policy_name => 'ACCESS_HOP',
-		user_name    => 'TAI_VU',
-		read_comps   => 'HTV',
-		write_comps  => 'HTV',
-		def_comps    => 'HTV',
-		row_comps    => 'HTV');
-END;
-/
-
-BEGIN
-	sa_user_admin.set_compartments(
-		policy_name => 'ACCESS_HOP',
-		user_name    => 'TIEP_TAN',
-		read_comps   => 'HTT',
-		write_comps  => 'HTT',
-		def_comps    => 'HTT',
-		row_comps    => 'HTT');
-END;
-/
-
-BEGIN
-	sa_user_admin.set_compartments(
-		policy_name => 'ACCESS_HOP',
-		user_name    => 'BAN_THUOC',
-		read_comps   => 'HBT',
-		write_comps  => 'HBT',
-		def_comps    => 'HBT',
-		row_comps    => 'HBT');
-END;
-/
-
-BEGIN
-	sa_user_admin.set_compartments(
-		policy_name => 'ACCESS_HOP',
-		user_name    => 'KE_TOAN',
-		read_comps   => 'HKT',
-		write_comps  => 'HKT',
-		def_comps    => 'HKT',
-		row_comps    => 'HKT');
-END;
-/
-
--- SET GROUPS
-
-BEGIN
-	sa_user_admin.set_groups(
-		policy_name => 'ACCESS_HOP',
-		user_name    => 'QUAN_LY_TAI_NGUYEN',
-		read_groups  => 'UK,CA',
-		write_groups => 'UK',
-		def_groups   => 'UK',
-		row_groups   => 'UK');
-END;
-/
-
-
---- DROP TABLE POLICY
-BEGIN
-    SA_POLICY_ADMIN.REMOVE_TABLE_POLICY
-    (
-        policy_name  => 'ACCESS_HOP',
-        schema_name => 'DBA_USER',
-        table_name => 'CUOC_HOP',
-        drop_column => TRUE
-    );
+    DBMS_FGA.DROP_POLICY('DBA_BV01', 'BENHNHAN', 'BENHNHAN_CHK_SELECT_DIACHI_SDT');
+    
     EXCEPTION WHEN OTHERS THEN NULL;
 END;
 /
 
------------------------------
+BEGIN
+    DBMS_FGA.ADD_POLICY(
+        OBJECT_SCHEMA => 'DBA_BV01',
+        OBJECT_NAME => 'BENHNHAN',
+        POLICY_NAME => 'BENHNHAN_CHK_SELECT_DIACHI_SDT',
+        AUDIT_COLUMN => 'DIACHI, SODIENTHOAI',
+        STATEMENT_TYPES => 'SELECT'
+    );
+END;
+/
 
 BEGIN
-    SA_POLICY_ADMIN.APPLY_TABLE_POLICY
-    (
-        policy_name  => 'ACCESS_HOP',
-        schema_name => 'DBA_USER',
-        table_name => 'CUOC_HOP',
-        table_options => 'NO_CONTROL'
+    DBMS_FGA.ADD_POLICY(
+        OBJECT_SCHEMA => 'DBA_BV01',
+        OBJECT_NAME => 'LUONG',
+        POLICY_NAME => 'LUONG_CHK_ALL',
+        AUDIT_COLUMN => 'MANV, THANG, NAM, NGAYCONG, PHUCAP, TONGLUONG',
+        STATEMENT_TYPES => 'SELECT, INSERT, DELETE, UPDATE'
+    );
+END;
+/
+
+BEGIN
+    DBMS_FGA.ADD_POLICY(
+        OBJECT_SCHEMA => 'DBA_BV01',
+        OBJECT_NAME => 'NHANVIEN',
+        POLICY_NAME => 'NHANVIEN_CHK_UNAME_PW',
+        AUDIT_COLUMN => 'LUONGCB, USERNAME, PASSWORD',
+        STATEMENT_TYPES => 'UPDATE, SELECT, INSERT, DELETE'
+    );
+END;
+/
+
+BEGIN
+    DBMS_FGA.ADD_POLICY(
+        OBJECT_SCHEMA => 'DBA_BV01',
+        OBJECT_NAME => 'CHAMCONG',
+        POLICY_NAME => 'LUONG_CHK_ALL',
+        AUDIT_COLUMN => 'MANV, BATDAULAM, KETTHUC',
+        STATEMENT_TYPES => 'INSERT, DELETE, UPDATE'
+    );
+END;
+/
+
+-- ALTER SESSION SET NLS_DATE_FORMAT='yyyy/mm/dd hh24:mi:ss';
+-- SELECT * FROM DBA_BV01.CHAMCONG
+
+BEGIN
+    DBMS_FGA.ADD_POLICY(
+        OBJECT_SCHEMA => 'DBA_BV01',
+        OBJECT_NAME => 'DICHVU',
+        POLICY_NAME => 'DV_CHK_GIA',
+        AUDIT_COLUMN => 'DONGIA',
+        STATEMENT_TYPES => 'INSERT, UPDATE'
+    );
+END;
+/
+
+BEGIN
+    DBMS_FGA.ADD_POLICY(
+        OBJECT_SCHEMA => 'DBA_BV01',
+        OBJECT_NAME => 'THUOC',
+        POLICY_NAME => 'THUOC_CHK_GIA',
+        AUDIT_COLUMN => 'DONGIA',
+        STATEMENT_TYPES => 'INSERT, UPDATE'
     );
 END;
 /

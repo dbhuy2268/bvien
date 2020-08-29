@@ -36,42 +36,64 @@ namespace QLBENHVIEN_ORCL
         {
             if (flag == 1)
             {
-                DBUtils dbu = new DBUtils();
-                String query = "create user " + textBox1.Text + " identified by " + textBox2.Text;
-                bool res = dbu.ExecuteNonQuery(query);
-                this.Close();
+                if (textBox1.Text == "" || textBox2.Text == "")
+                {
+                    MessageBox.Show("Vui long nhap du thong tin");
+                }
+                else
+                {
+                    DBUtils dbu = new DBUtils();
+                    String query = "create user " + textBox1.Text + " identified by " + textBox2.Text;
+                    bool res = dbu.ExecuteNonQuery(query);
+                    this.Close();
+                }  
             }
             if (flag == 2)
             {
-                String pass = "";
-                if (textBox2.Text != "")
+                if (textBox1.Text == "")
                 {
-                    pass += " identified by " + textBox2.Text;
+                    MessageBox.Show("Vui long nhap ten");
                 }
-                DBUtils dbu = new DBUtils();
-                String query = "create role " + textBox1.Text + pass;
-                bool res = dbu.ExecuteNonQuery(query);
-                this.Close();
+                else
+                {
+                    String pass = "";
+                    if (textBox2.Text != "")
+                    {
+                        pass += " identified by " + textBox2.Text;
+                    }
+                    DBUtils dbu = new DBUtils();
+                    String query = "create role " + textBox1.Text + pass;
+                    bool res = dbu.ExecuteNonQuery(query);
+                    this.Close();
+                }
             }
             if (flag == 3)
             {
-                DBUtils dbu = new DBUtils();
-                String query = "ALTER USER " + user + " IDENTIFIED BY " + textBox2.Text;
-                MessageBox.Show(query);
+                if (textBox2.Text == "")
+                {
+                    MessageBox.Show("Vui long nhap mat khau moi");
+                }
+                else
+                {
+                    DBUtils dbu = new DBUtils();
+                    String query = "ALTER USER " + user + " IDENTIFIED BY " + textBox2.Text;
+                    MessageBox.Show(query);
 
-                bool res = dbu.ExecuteNonQuery(query);
-                MessageBox.Show("ALTER USER SUCCESSFUL.");
-                this.Close();
+                    bool res = dbu.ExecuteNonQuery(query);
+                    MessageBox.Show("ALTER USER SUCCESSFUL.");
+                    this.Close();
+                }
             }
             if (flag == 4)
             {
-                DBUtils dbu = new DBUtils();
-                String query = "ALTER ROLE " + role + ((textBox2.Text == "") ? " NOT IDENTIFIED " : " IDENTIFIED BY " + textBox2.Text);
-                if (dbu.ExecuteNonQuery(query))
-                {
-                    MessageBox.Show("ALTER ROLE SUCCESSFUL.");
-                }
-                this.Close();
+                    DBUtils dbu = new DBUtils();
+                    String query = "ALTER ROLE " + role + ((textBox2.Text == "") ? " NOT IDENTIFIED " : " IDENTIFIED BY " + textBox2.Text);
+                    if (dbu.ExecuteNonQuery(query))
+                    {
+                        MessageBox.Show("ALTER ROLE SUCCESSFUL.");
+                    }
+                    this.Close();
+                
             }
             mainForm.LoadUser_gridView();
             mainForm.LoadRole_gridView();
