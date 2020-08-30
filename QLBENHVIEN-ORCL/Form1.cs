@@ -189,5 +189,44 @@ namespace QLBENHVIEN_ORCL
             Globals.curr_session_id = "DBA_BV01";
             Globals.curr_session_pw = "1";
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (comboBox2.Text.Equals(""))
+            {
+                MessageBox.Show("VUI LÒNG CHỌN USER DEMO");
+                return;
+            }
+
+            if (richTextBox2.Text.Equals(""))
+            {
+                MessageBox.Show("VUI LÒNG NHẬP CÂU TRUY VẤN DEMO");
+                return;
+            }
+
+            
+            Globals.curr_session_id = comboBox2.Text.Substring(0, comboBox2.Text.IndexOf(' '));
+            Globals.curr_session_pw = "1";
+            _ = new DBOracleUtils();
+
+            DBUtils dbu = new DBUtils();
+            string query = richTextBox2.Text;
+
+            MessageBox.Show(query);
+
+            dataGridView3.DataSource = dbu.ExecuteQuery(query);
+
+            for (int i = 1; i <= dataGridView3.Columns.Count - 1; i++)
+            {
+                //store autosized widths
+                //remove autosizing
+                dataGridView3.Columns[i - 1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+                dataGridView3.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+            }
+
+            Globals.curr_session_id = "DBA_BV01";
+            Globals.curr_session_pw = "1";
+        }
     }
 }
