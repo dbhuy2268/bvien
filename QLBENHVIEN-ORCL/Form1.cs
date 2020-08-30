@@ -79,7 +79,7 @@ namespace QLBENHVIEN_ORCL
                     frm_priv.ShowDialog();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return;
             }
@@ -97,7 +97,7 @@ namespace QLBENHVIEN_ORCL
                     frm_priv.ShowDialog();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return;
             }
@@ -146,7 +146,7 @@ namespace QLBENHVIEN_ORCL
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return;
             }
