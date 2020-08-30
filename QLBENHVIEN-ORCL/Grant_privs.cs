@@ -203,7 +203,7 @@ namespace QLBENHVIEN_ORCL
                         {
                             string query = "grant " + priv + " to " + Cur_user;
                             Form go = new Grant_Option(this, 1, Cur_user, Cur_role, query);
-                            go.Show();
+                            go.ShowDialog();
                         }
                         else
                         {
@@ -335,7 +335,7 @@ namespace QLBENHVIEN_ORCL
                         query += " from " + tableName;
 
                         grant_revoke_objectPriv grant_Revoke_ObjectPriv = new grant_revoke_objectPriv(this, privcs, query, Cur_user, Cur_role, (flag == 4 ? 6 : 5), tableName);
-                        grant_Revoke_ObjectPriv.Show();
+                        grant_Revoke_ObjectPriv.ShowDialog();
                     }
                     if (e.ColumnIndex == 1 || e.ColumnIndex == 2)
                     {
@@ -348,7 +348,7 @@ namespace QLBENHVIEN_ORCL
                         string query = " UPDATE(" + dataGridView2[4, e.RowIndex].Value.ToString() + ") on " + tableName;
 
                         grant_revoke_objectPriv grant_Revoke_ObjectPriv = new grant_revoke_objectPriv(this, privcs, query, Cur_user, Cur_role, flag);
-                        grant_Revoke_ObjectPriv.Show();
+                        grant_Revoke_ObjectPriv.ShowDialog();
                     }
                 }
                 else
@@ -357,25 +357,25 @@ namespace QLBENHVIEN_ORCL
                     {
                         string query = " SELECT ON " + dataGridView2[5, e.RowIndex].Value.ToString() + "." + dataGridView2[4, e.RowIndex].Value.ToString();
                         grant_revoke_objectPriv grant_Revoke_ObjectPriv = new grant_revoke_objectPriv(this, privcs, query, Cur_user, Cur_role, (flag == 2 ? 4 : 3));
-                        grant_Revoke_ObjectPriv.Show();
+                        grant_Revoke_ObjectPriv.ShowDialog();
                     }
                     if (e.ColumnIndex == 1) //INSERT
                     {
                         string query = " INSERT ON " + dataGridView2[5, e.RowIndex].Value.ToString() + "." + dataGridView2[4, e.RowIndex].Value.ToString();
                         grant_revoke_objectPriv grant_Revoke_ObjectPriv = new grant_revoke_objectPriv(this, privcs, query, Cur_user, Cur_role, (flag == 2 ? 4 : 3));
-                        grant_Revoke_ObjectPriv.Show();
+                        grant_Revoke_ObjectPriv.ShowDialog();
                     }
                     if (e.ColumnIndex == 2) //DELETE
                     {
                         string query = " DELETE ON " + dataGridView2[5, e.RowIndex].Value.ToString() + "." + dataGridView2[4, e.RowIndex].Value.ToString();
                         grant_revoke_objectPriv grant_Revoke_ObjectPriv = new grant_revoke_objectPriv(this, privcs, query, Cur_user, Cur_role, (flag == 2 ? 4 : 3));
-                        grant_Revoke_ObjectPriv.Show();
+                        grant_Revoke_ObjectPriv.ShowDialog();
                     }
                     if (e.ColumnIndex == 3) //UPDATE
                     {
                         string query = " UPDATE ON " + dataGridView2[5, e.RowIndex].Value.ToString() + "." + dataGridView2[4, e.RowIndex].Value.ToString();
                         grant_revoke_objectPriv grant_Revoke_ObjectPriv = new grant_revoke_objectPriv(this, privcs, query, Cur_user, Cur_role, (flag == 2 ? 4 : 3));
-                        grant_Revoke_ObjectPriv.Show();
+                        grant_Revoke_ObjectPriv.ShowDialog();
                     }
                 }
             }
@@ -432,7 +432,7 @@ namespace QLBENHVIEN_ORCL
                     {
                         query = "grant " + Granted_role + " to " + Cur_user;
                         Grant_Option go = new Grant_Option(this, 3, Cur_user, Cur_role, query);
-                        go.Show();
+                        go.ShowDialog();
                     }
                     else
                     {

@@ -46,6 +46,13 @@ namespace QLBENHVIEN_ORCL
             {
                 q = qq;
                 q = "GRANT" + q + " TO " + ((flag == 3) ? cUser : cRole);
+                DialogResult res = MessageBox.Show("WITH GRANT OPTION?", "Grant option", MessageBoxButtons.YesNo);
+
+                if (res == DialogResult.Yes)
+                {
+                    q = q + " with grant option";
+                }
+
                 MessageBox.Show(q);
 
                 DBUtils dbu = new DBUtils();
@@ -75,6 +82,14 @@ namespace QLBENHVIEN_ORCL
                 q = qq;
                 q = "CREATE OR REPLACE " + q;
                 string qGrant = "GRANT SELECT ON " + ((flag == 5) ? cUser : cRole) + "_" + tabName + " TO " + ((flag == 5) ? cUser : cRole);
+
+                DialogResult res = MessageBox.Show("WITH GRANT OPTION?", "Grant option", MessageBoxButtons.YesNo);
+
+                if (res == DialogResult.Yes)
+                {
+                    qGrant = qGrant + " with grant option";
+                }
+
                 MessageBox.Show(q);
                 MessageBox.Show(qGrant);
                 DBUtils dbu = new DBUtils();

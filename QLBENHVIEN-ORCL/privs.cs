@@ -169,7 +169,14 @@ namespace QLBENHVIEN_ORCL
                 DBUtils dbu = new DBUtils();
                 String query = "drop user " + curUser + " cascade";
                 clean_litter();
-                bool res = dbu.ExecuteNonQuery(query);
+                if (dbu.ExecuteNonQuery(query))
+                {
+                    MessageBox.Show("XOA THANH CONG");
+                }
+                else
+                {
+                    MessageBox.Show("KHONG THANH CONG");
+                }
                 this.Close();
                 this.mainForm.LoadUser_gridView();
             }
@@ -183,6 +190,5 @@ namespace QLBENHVIEN_ORCL
                 this.mainForm.LoadRole_gridView();
             }
         }
-
     }
 }

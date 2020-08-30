@@ -34,6 +34,10 @@ namespace QLBENHVIEN_ORCL
 
         private void button3_Click(object sender, EventArgs e)
         {
+            if (textBox1.Text.Contains(" "))
+            {
+                MessageBox.Show("input khong duoc chua khoang trang");
+            }
             if (flag == 1)
             {
                 if (textBox1.Text == "" || textBox2.Text == "")
@@ -43,7 +47,7 @@ namespace QLBENHVIEN_ORCL
                 else
                 {
                     DBUtils dbu = new DBUtils();
-                    String query = "create user " + textBox1.Text + " identified by " + textBox2.Text;
+                    String query = "create user " + textBox1.Text + " identified by \"" + textBox2.Text+ "\"";
                     bool res = dbu.ExecuteNonQuery(query);
                     this.Close();
                 }  
@@ -59,7 +63,7 @@ namespace QLBENHVIEN_ORCL
                     String pass = "";
                     if (textBox2.Text != "")
                     {
-                        pass += " identified by " + textBox2.Text;
+                        pass += " identified by \"" + textBox2.Text + "\"";
                     }
                     DBUtils dbu = new DBUtils();
                     String query = "create role " + textBox1.Text + pass;
@@ -76,7 +80,7 @@ namespace QLBENHVIEN_ORCL
                 else
                 {
                     DBUtils dbu = new DBUtils();
-                    String query = "ALTER USER " + user + " IDENTIFIED BY " + textBox2.Text;
+                    String query = "ALTER USER " + user + " identified by \"" + textBox2.Text + "\"";
                     MessageBox.Show(query);
 
                     bool res = dbu.ExecuteNonQuery(query);
@@ -87,7 +91,7 @@ namespace QLBENHVIEN_ORCL
             if (flag == 4)
             {
                     DBUtils dbu = new DBUtils();
-                    String query = "ALTER ROLE " + role + ((textBox2.Text == "") ? " NOT IDENTIFIED " : " IDENTIFIED BY " + textBox2.Text);
+                    String query = "ALTER ROLE " + role + ((textBox2.Text == "") ? " NOT IDENTIFIED " : " identified by \"" + textBox2.Text + "\"");
                     if (dbu.ExecuteNonQuery(query))
                     {
                         MessageBox.Show("ALTER ROLE SUCCESSFUL.");

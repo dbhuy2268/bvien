@@ -53,7 +53,8 @@ namespace QLBENHVIEN_ORCL
         public void LoadUser_gridView()
         {
             DBUtils dbu = new DBUtils();
-            string query = "select * from dba_users where account_status = 'OPEN' AND USERNAME NOT IN ('SYS', 'SYSTEM', 'DBA_BV01')";
+            string query = "select * from dba_users where oracle_maintained = 'N' and account_status = 'OPEN'";
+                //"//account_status = 'OPEN' AND USERNAME NOT IN ('SYS', 'SYSTEM', 'DBA_BV01')"
             DataTable dt = dbu.ExecuteQuery(query);
             grv_all_user.DataSource = dt;
         }
